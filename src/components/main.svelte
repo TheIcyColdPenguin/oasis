@@ -1,4 +1,17 @@
-<main>hi</main>
+<script lang="ts">
+    import { onMount } from 'svelte';
+    import { invoke } from '@tauri-apps/api';
+
+    let text = 'hi';
+
+    onMount(() => {
+        setTimeout(async () => {
+            text = JSON.stringify(await invoke('hello'));
+        }, 1000);
+    });
+</script>
+
+<main>{text}</main>
 
 <style>
     main {
