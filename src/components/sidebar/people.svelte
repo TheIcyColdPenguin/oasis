@@ -15,13 +15,13 @@
 
 <main in:fade>
     <h2>People</h2>
-    <aside>
+    <section>
         {#each people as person, i}
             <div in:fly={{ x: -50 }}>
                 <span in:fly={{ x: -50, delay: 50 * i }}>{person.name}</span>
             </div>
         {/each}
-    </aside>
+    </section>
 </main>
 
 <style lang="scss">

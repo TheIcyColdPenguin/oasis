@@ -5,8 +5,11 @@
 
 <style lang="scss">
     main {
+        position: absolute;
+        top: 0;
+
         width: 100vw;
-        height: 100vh;
+        height: 90vh;
 
         margin: 0;
         padding: 0;
@@ -18,6 +21,7 @@
 
         justify-content: center;
         align-items: center;
+        row-gap: 3rem;
 
         font-family: 'Spirax', cursive;
 
