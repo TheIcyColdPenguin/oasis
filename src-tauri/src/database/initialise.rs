@@ -28,15 +28,21 @@ impl DatabaseManager {
 
         #[cfg(debug_assertions)]
         {
-            connection.execute(
-                "
-            INSERT OR IGNORE INTO person (person_id, person_name, person_summary) VALUES (?1, ?2, ?3);",
-                (&1, &"John Doe", &"A person"),
-            )?;
+            // test person data
 
             connection.execute(
-                "
-            INSERT OR IGNORE INTO note (note_id, note_text, person_id) VALUES (?1, ?2, ?3);",
+                "INSERT OR IGNORE INTO person (person_id, person_name, person_summary) VALUES (?1, ?2, ?3);",
+                (&1, &"John Doe", &"A person")
+            )?;
+            connection.execute(
+                "INSERT OR IGNORE INTO person (person_id, person_name, person_summary) VALUES (?1, ?2, ?3);",
+                (&2, &"Jane Doe", &"Another person")
+            )?;
+
+            // test note data
+
+            connection.execute(
+                "INSERT OR IGNORE INTO note (note_id, note_text, person_id) VALUES (?1, ?2, ?3);",
                 (&1, &"Note content here", &1),
             )?;
         }

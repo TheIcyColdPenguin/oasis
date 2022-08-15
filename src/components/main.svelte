@@ -1,17 +1,12 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { invoke } from '@tauri-apps/api';
-
-    let text = 'hi';
-
-    onMount(() => {
-        setTimeout(async () => {
-            text = JSON.stringify(await invoke('hello'));
-        }, 1000);
-    });
+    import People from './sidebar/people.svelte';
 </script>
 
-<main>{text}</main>
+<main>
+    <aside>
+        <People />
+    </aside>
+</main>
 
 <style>
     main {
@@ -22,8 +17,10 @@
         padding: 0;
 
         display: grid;
-        place-items: center;
+        grid-template-columns: minmax(200px, 2fr) 8fr;
+    }
 
-        text-align: center;
+    aside {
+        border-right: 3px solid #ffffff33;
     }
 </style>
