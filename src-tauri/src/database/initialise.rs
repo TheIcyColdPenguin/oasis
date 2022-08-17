@@ -4,6 +4,14 @@ use rusqlite::Connection;
 
 impl DatabaseManager {
     pub fn initialise(connection: &Connection) -> Result<(), Box<dyn std::error::Error>> {
+        #[cfg(debug_assertions)]
+        {
+            // cleanup tables
+            // order matters due to foreign key constraints
+            connection.execute("DROP TABLE IF EXISTS note;", ())?;
+            connection.execute("DROP TABLE IF EXISTS person;", ())?;
+        }
+
         connection.execute("PRAGMA foreign_keys = ON;", ())?;
         connection.execute(
             "CREATE TABLE IF NOT EXISTS person (
@@ -44,6 +52,10 @@ impl DatabaseManager {
             connection.execute(
                 "INSERT OR IGNORE INTO note (note_id, note_text, person_id) VALUES (?1, ?2, ?3);",
                 (&1, &"Note content here", &1),
+            )?;
+            connection.execute(
+                "INSERT OR IGNORE INTO note (note_id, note_text, person_id) VALUES (?1, ?2, ?3);",
+                (&2, &"more notes here", &1),
             )?;
         }
 

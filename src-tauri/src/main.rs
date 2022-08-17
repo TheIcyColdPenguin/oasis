@@ -15,7 +15,10 @@ lazy_static::lazy_static! {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![commands::get_persons])
+        .invoke_handler(tauri::generate_handler![
+            commands::get_persons,
+            commands::get_notes
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

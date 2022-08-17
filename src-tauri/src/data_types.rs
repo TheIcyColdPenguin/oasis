@@ -1,3 +1,2 @@
 pub mod schemas;
-
-pub use schemas::Person;
+pub use schemas::*;

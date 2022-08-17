@@ -3,21 +3,19 @@
 
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
-
-    import type { Person } from '../../types';
-
-    let people: Person[] = [];
+    import { people } from '../../stores/people';
+    import { selectedPerson } from '../../stores/selected_person';
 
     onMount(async () => {
-        people = await invoke('get_persons');
+        $people = await invoke('get_persons');
     });
 </script>
 
 <main in:fade>
     <h2>People</h2>
     <section>
-        {#each people as person, i}
-            <div in:fly={{ x: -50 }}>
+        {#each $people as person, i}
+            <div in:fly={{ x: -50 }} on:click={() => ($selectedPerson = person)}>
                 <span in:fly={{ x: -50, delay: 50 * i }}>{person.name}</span>
             </div>
         {/each}
